@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private PostAdapter postAdapter;
-    private ArrayList<Post> posts =new ArrayList<>();
+    private ArrayList<Post> listaDePost =new ArrayList<>();
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar; //  Esta vez se me ha  ocurrido añadirle una barra de progreso circulas que se va a activar antes de abrir datos
 
@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 mProgressBar.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body()!=null) {
-                    posts = new ArrayList<>(response.body());
-                    postAdapter =new PostAdapter(posts,MainActivity.this);
+                    listaDePost = new ArrayList<>(response.body());
+                    postAdapter =new PostAdapter(listaDePost,MainActivity.this);
                     mRecyclerView.setAdapter(postAdapter);
                 }
             }

@@ -100,7 +100,7 @@
             android:id="@+id/tituloBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title: "
+            android:text="Body: "
             android:textSize="16dp"
             android:textStyle="bold|italic"
             android:textColor="#FF5722"/>
