@@ -21,6 +21,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    //URL de donde va a leer la API
+    
+    private final String baseUrl = "https://jsonplaceholder.typicode.com/";
+
     private PostAdapter postAdapter;
     private ArrayList<Post> listaDePost =new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -62,13 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         mProgressBar.setVisibility(View.VISIBLE);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        //Ahora le paso al singleton RetrofitClient la url de la api
 
-        RestClient request = retrofit.create(RestClient.class);
-        Call<List<Post>> call1=request.getObtenerPost();
+        RestClient restClient = RetrofitClient.getClient(baseUrl).create(RestClient.class);
+
+        Call<List<Post>> call1=restClient.getObtenerPost();
         call1.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
