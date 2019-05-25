@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     //URL de donde va a leer la API
-    
+
     private final String baseUrl = "https://jsonplaceholder.typicode.com/";
 
     private PostAdapter postAdapter;
