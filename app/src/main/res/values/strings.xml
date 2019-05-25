@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HTTP_con_Retrofit_Final</string>
+    <string name="recibir_datos">Recibir Datos</string>
+</resources>
