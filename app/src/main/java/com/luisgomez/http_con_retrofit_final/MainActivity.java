@@ -16,8 +16,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
     private final String baseUrl = "https://jsonplaceholder.typicode.com/";
 
-    private PostAdapter postAdapter;
-    private ArrayList<Post> listaDePost =new ArrayList<>();
-    private RecyclerView mRecyclerView;
-    private ProgressBar mProgressBar; //  Esta vez se me ha  ocurrido añadirle una barra de progreso circulas que se va a activar antes de abrir datos
+     PostAdapter postAdapter;
+     ArrayList<Post> listaDePost =new ArrayList<>();
+     RecyclerView rvPost;
+     ProgressBar mProgressBar; //  Esta vez se me ha  ocurrido añadirle una barra de progreso circulas que se va a activar antes de abrir datos
 
     // Para el proyecto de investigacion de GPS del segundo trimestre,
     // tenia una primera activity con un ProgressBar y al tiempo de unos segundos automaticamente
@@ -44,16 +42,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mProgressBar=(ProgressBar)findViewById(R.id.progress_bar);
-        //mProgressBar.setVisibility(View.VISIBLE);
-        mRecyclerView=(RecyclerView)findViewById(R.id.listadoDePosts);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        rvPost =(RecyclerView)findViewById(R.id.listadoDePosts);
+
+        rvPost.setLayoutManager(new LinearLayoutManager(this));
 
         recibirDatosGet = findViewById(R.id.btnRecibirDatosGet);
         recibirDatosGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-        loadJSON();
+            loadJSON();
 
             }
         });
@@ -76,9 +75,12 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 mProgressBar.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body()!=null) {
+
                     listaDePost = new ArrayList<>(response.body());
+
                     postAdapter =new PostAdapter(listaDePost,MainActivity.this);
-                    mRecyclerView.setAdapter(postAdapter);
+
+                    rvPost.setAdapter(postAdapter);
                 }
             }
 

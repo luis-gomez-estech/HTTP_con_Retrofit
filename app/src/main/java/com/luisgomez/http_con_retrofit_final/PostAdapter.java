@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
+
     //private ArrayList<Post> listaPost=new ArrayList<>();
 
     List<Post> listaPost;
@@ -21,23 +22,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     @Override
-    public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public PostViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_layout, viewGroup, false);
-        return new ViewHolder(view);
+        return new PostViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(PostAdapter.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(PostViewHolder postViewHolder, final int i) {
 
         final Integer userId= listaPost.get(i).getUserId();
         final Integer id= listaPost.get(i).getId();
         final String title= listaPost.get(i).getTitle();
         final String body= listaPost.get(i).getBody();
 
-        viewHolder.userId.setText(userId.toString());
-        viewHolder.id.setText(id.toString());
-        viewHolder.title.setText(title);
-        viewHolder.body.setText(body);
+        postViewHolder.userId.setText(userId.toString());
+        postViewHolder.id.setText(id.toString());
+        postViewHolder.title.setText(title);
+        postViewHolder.body.setText(body);
 
     }
 
@@ -46,12 +47,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return listaPost.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class PostViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView userId, id,title, body;
+        TextView userId;
+        TextView id;
+        TextView title;
+        TextView body;
 
-
-        public ViewHolder(View view) {
+        public PostViewHolder(View view) {
             super(view);
 
             userId = (TextView)view.findViewById(R.id.tvUserId);
